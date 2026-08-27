@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burguila Hamburgueria</title>
+    <!-- Importando ícones do FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 24px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: transparent;
+            border: none;
+            padding: 10px;
+            margin: auto;
+        }
+
+        /* Logo e Título Responsivos */
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+            border: none;
+            background: transparent;
+            display: block;
+        }
+
+        .brand-title {
+            font-size: clamp(1.1rem, 4vw, 1.35rem);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .brand-subtitle-tag {
+            font-size: clamp(0.75rem, 2.5vw, 0.82rem);
+            font-weight: 400;
+            color: #ff9800;
+            letter-spacing: 0.3px;
+        }
+
+        /* Palmas - TO e Delivery abaixo */
+        .header-location {
+            font-size: clamp(0.9rem, 3.5vw, 0.95rem);
+            line-height: 1.5;
+            color: #cccccc;
+            margin-bottom: 24px;
+            padding: 0 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .delivery-subtext {
+            display: block;
+            margin-top: 4px;
+            font-weight: 400;
+            color: #aaaaaa;
+            letter-spacing: 0.3px;
+        }
+
+        /* Container dos Botões */
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo dos Botões com Efeito Espelhado Exclusivo */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 14px 18px;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            background-color: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efeito de brilho passando somente nos botões */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            pointer-events: none;
+            animation: shine 4s infinite ease-in-out;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateY(-100%) rotate(30deg);
+            }
+            20% {
+                transform: translateY(100%) rotate(30deg);
+            }
+            100% {
+                transform: translateY(100%) rotate(30deg);
+            }
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #222222;
+            border-color: #333333;
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Conteúdo interno esquerdo (Ícone + Textos) */
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Mini ícone quadrado dentro do botão */
+        .btn-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        /* Estilo específico para imagem dentro do box do ifood */
+        .btn-icon-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Cores dos ícones */
+        .btn-whatsapp .btn-icon-box {
+            background-color: #0b2e13;
+            color: #25d366;
+        }
+
+        .btn-menu .btn-icon-box {
+            background-color: #ffffff;
+            color: #0066cc;
+        }
+
+        .btn-ifood .btn-icon-box {
+            background-color: #ffffff;
+        }
+
+        /* Textos empilhados com quebra segura */
+        .btn-text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .btn-title {
+            font-size: clamp(0.95rem, 4vw, 1.05rem);
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 3px;
+            white-space: nowrap;
+        }
+
+        .btn-subtitle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: clamp(0.7rem, 3vw, 0.8rem);
+            font-weight: 400;
+            color: #aaaaaa;
+            white-space: nowrap;
+        }
+
+        /* Indicador de status */
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .dot-green {
+            background-color: #25d366;
+            box-shadow: 0 0 6px rgba(37, 211, 102, 0.6);
+        }
+
+        .dot-blue {
+            background-color: #2196f3;
+            box-shadow: 0 0 6px rgba(33, 150, 243, 0.6);
+        }
+
+        .dot-red {
+            background-color: #ea1d2c;
+            box-shadow: 0 0 6px rgba(234, 29, 44, 0.6);
+        }
+
+        /* Seta à direita */
+        .btn-arrow {
+            color: #666666;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            flex-shrink: 0;
+            margin-left: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn:hover .btn-arrow {
+            color: #ffffff;
+        }
+
+        /* Contador de Visualizações limpo */
+        .views-counter {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .views-counter i {
+            color: #d1c7a2;
+            font-size: 0.95rem;
+        }
+
+        /* Rodapé Final Organizado */
+        .footer-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #1f1f1f;
+        }
+
+        .footer-location {
+            font-size: clamp(0.82rem, 3vw, 0.88rem);
+            line-height: 1.4;
+            color: #888888;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 6px;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .footer-location i {
+            color: #ff4757;
+            font-size: 0.95rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .footer-copy {
+            font-size: 0.72rem;
+            color: #666666;
+            letter-spacing: 0.2px;
+        }
+
+        @media (max-width: 360px) {
+            body {
+                padding: 16px 10px;
+            }
+            .logo {
+                max-width: 150px;
+            }
+            .btn {
+                padding: 12px 14px;
+            }
+            .btn-icon-box {
+                width: 42px;
+                height: 42px;
+                font-size: 1.4rem;
+            }
+            .btn-title {
+                font-size: 0.9rem;
+            }
+            .btn-subtitle {
+                font-size: 0.68rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo e Título -->
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZFuiS9g7cPRCeA45uB1347dWamCXfwmdLa6wC5VfDCCnmk877ekopypCiEOuV4FHWyxI6IjTxq6YZuifCMFpgS5oo4KtTmJFE8xcnaErLVcNpCUcSbs7JMtheBpW-zamji4eTblwged29wsz8qvay_0yFmP0YPDMIoxEDULhpGNRgkjyb2FaSdnoa7mA/s1600/253781.png" alt="Burguila Hamburgueria Logo" class="logo">
+            </div>
+            <h1 class="brand-title">Burguila Hamburgueria</h1>
+            <p class="brand-subtitle-tag">O Melhor Hamburguer de Palmas e Região 🥇</p>
+        </div>
+
+        <!-- Palmas - TO e Delivery abaixo -->
+        <div class="header-location">
+            <span>Palmas - TO</span>
+            <span class="delivery-subtext">Delivery e retirada</span>
+        </div>
+
+        <!-- Botões -->
+        <div class="buttons-container">
+            <!-- Botão Fazer Pedido Online -->
+            <a href="#" target="_blank" class="btn btn-menu">
+                <div class="btn-content">
+                    <div class="btn-icon-box">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="btn-text-group">
+                        <span class="btn-title">Fazer Pedido Online</span>
+                        <span class="btn-subtitle"><span class="status-dot dot-blue"></span>Peça diretamente pelo nosso sistema</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right btn-arrow"></i>
+            </a>
+
+            <!-- Botão WhatsApp -->
+            <a href="#" target="_blank" class="btn btn-whatsapp">
+                <div class="btn-content">
+                    <div class="btn-icon-box">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="btn-text-group">
+                        <span class="btn-title">Peça pelo WhatsApp</span>
+                        <span class="btn-subtitle"><span class="status-dot dot-green"></span>1 atendente online agora</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right btn-arrow"></i>
+            </a>
+
+            <!-- Botão iFood -->
+            <a href="#" target="_blank" class="btn btn-ifood">
+                <div class="btn-content">
+                    <div class="btn-icon-box">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh64lrXozPCYGv6nTWxPZN3OFSZ4XXOnFP9rdap9moWM0rng_ggHuTl_rdNfT6-EuO-cKBut0uqEo5ZDD74L0px7VdclZ5CI0O7XiVFthjFaTPHag8Ox1T1LPLTjdnoIUYIMRpx2AUduytlCCtfUbIgfVYIONMJQqbxNQwkP_rUfZ6_KSTcelHomqpgLNE/s1600/254229.png" alt="iFood Logo">
+                    </div>
+                    <div class="btn-text-group">
+                        <span class="btn-title">Peça pelo iFood</span>
+                        <span class="btn-subtitle"><span class="status-dot dot-red"></span>A melhor de Palmas!</span>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right btn-arrow"></i>
+            </a>
+        </div>
+
+        <!-- Contador de Visualizações -->
+        <div class="views-counter">
+            <i class="fa-solid fa-eye"></i> <span>1.482</span>
+        </div>
+
+        <!-- Rodapé Final Organizado -->
+        <div class="footer-info">
+            <div class="footer-location">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Alameda 18 Qi 10 arso 132 A, 14 - plano diretor Sul<br>CEP: 77025-268</span>
+            </div>
+            <div class="footer-copy">
+                © 2026 Burguila · Todos os direitos reservados
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
