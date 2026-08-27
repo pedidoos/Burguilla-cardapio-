@@ -373,7 +373,7 @@
         <!-- Botões -->
         <div class="buttons-container">
             <!-- Botão Fazer Pedido Online -->
-            <a href="#" target="_blank" class="btn btn-menu">
+            <a href="https://cardapio.burguila.com.br" target="_blank" class="btn btn-menu">
                 <div class="btn-content">
                     <div class="btn-icon-box">
                         <i class="fa-solid fa-utensils"></i>
@@ -387,7 +387,7 @@
             </a>
 
             <!-- Botão WhatsApp -->
-            <a href="#" target="_blank" class="btn btn-whatsapp">
+            <a href="https://wa.me/5563999210048?text=Olá%20quero%20fazer%20meu%20pedido!%20🍔" target="_blank" class="btn btn-whatsapp">
                 <div class="btn-content">
                     <div class="btn-icon-box">
                         <i class="fa-brands fa-whatsapp"></i>
@@ -401,7 +401,7 @@
             </a>
 
             <!-- Botão iFood -->
-            <a href="#" target="_blank" class="btn btn-ifood">
+            <a href="https://www.ifood.com.br/delivery/palmas-to/burguila-hamburgueria-plano-diretor-sul/ff335c10-c893-4827-b57e-105bc6673aed?UTM_Medium=share" target="_blank" class="btn btn-ifood">
                 <div class="btn-content">
                     <div class="btn-icon-box">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh64lrXozPCYGv6nTWxPZN3OFSZ4XXOnFP9rdap9moWM0rng_ggHuTl_rdNfT6-EuO-cKBut0uqEo5ZDD74L0px7VdclZ5CI0O7XiVFthjFaTPHag8Ox1T1LPLTjdnoIUYIMRpx2AUduytlCCtfUbIgfVYIONMJQqbxNQwkP_rUfZ6_KSTcelHomqpgLNE/s1600/254229.png" alt="iFood Logo">
@@ -415,9 +415,9 @@
             </a>
         </div>
 
-        <!-- Contador de Visualizações -->
+        <!-- Contador de Visualizações Dinâmico -->
         <div class="views-counter">
-            <i class="fa-solid fa-eye"></i> <span>1.482</span>
+            <i class="fa-solid fa-eye"></i> <span id="visitas-count">1.482</span>
         </div>
 
         <!-- Rodapé Final Organizado -->
@@ -432,5 +432,30 @@
         </div>
     </div>
 
+    <!-- Script do Contador de Visitas -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Chave usada para salvar no navegador
+            const storageKey = "burguila_visitas_total";
+            
+            // Pega o valor salvo ou inicia em 1481 para que o próximo somado seja 1.482
+            let visitas = localStorage.getItem(storageKey);
+            
+            if (!visitas) {
+                visitas = 1481; 
+            } else {
+                visitas = parseInt(visitas);
+            }
+
+            // Incrementa +1 a cada nova visita/atualização da página
+            visitas++;
+
+            // Salva de volta no armazenamento do navegador
+            localStorage.setItem(storageKey, visitas);
+
+            // Formata o número com pontos (Ex: 1.482, 10.500) e exibe na tela
+            document.getElementById("visitas-count").innerText = visitas.toLocaleString('pt-BR');
+        });
+    </script>
 </body>
 </html>
